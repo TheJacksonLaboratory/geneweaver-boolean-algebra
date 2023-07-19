@@ -1,10 +1,10 @@
+"""Tests for the iterable_to_sets() function."""
 import pytest
-
 from geneweaver.tools.boolean_algebra.utils import iterable_to_sets
 
 
 @pytest.mark.parametrize(
-    "input_sets, expected",
+    ("input_sets", "expected"),
     [
         ([[1, 2, 3], [4, 5, 6]], [{1, 2, 3}, {4, 5, 6}]),
         ([[1, 1, 2, 2, 3, 3], [4, 4, 5, 5, 6, 6]], [{1, 2, 3}, {4, 5, 6}]),
@@ -47,6 +47,7 @@ from geneweaver.tools.boolean_algebra.utils import iterable_to_sets
     ],
 )
 def test_iterable_to_sets(input_sets, expected):
+    """Test that iterable_to_sets() returns the expected output."""
     assert iterable_to_sets(input_sets) == expected
 
 
@@ -64,5 +65,6 @@ def test_iterable_to_sets(input_sets, expected):
     ],
 )
 def test_raises_unhashable(input_sets):
+    """Test that passing unhashable types to iterable of sets should raise and error."""
     with pytest.raises(TypeError, match="unhashable type"):
         iterable_to_sets(input_sets)

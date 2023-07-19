@@ -1,8 +1,9 @@
 """Find the intersection of N genesets.
 
-The result will contain sets of genes that are shared across the input sets."""
-from typing import Set, Hashable, Dict, Optional
+The result will contain sets of genes that are shared across the input sets.
+"""
 import itertools
+from typing import Dict, Hashable, Optional, Set
 
 
 def intersection(*args: Set[Hashable]) -> Set[Hashable]:

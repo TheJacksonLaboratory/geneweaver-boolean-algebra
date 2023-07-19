@@ -1,9 +1,9 @@
 """Schema for the Boolean Algebra tool."""
 import enum
-from pydantic import BaseModel
-from typing import List, Optional, Hashable, Set, Dict, Union
+from typing import Any, Dict, Hashable, List, Optional, Set, Union
 
 from geneweaver.tools.framework.schema import ToolInput, ToolOutput
+from pydantic import BaseModel
 
 
 class GeneValue(BaseModel):
@@ -19,11 +19,13 @@ class GeneValue(BaseModel):
 
         allow_mutation = False
 
-    def __hash__(self):
+    def __hash__(self: "GeneValue") -> int:
+        """Hash the gene symbol (without value)."""
         # TODO note about hashing collisions
         return hash(self.symbol)
 
-    def __eq__(self, other):
+    def __eq__(self: "GeneValue", other: Any) -> bool:  # noqa: ANN401
+        """Compare the gene symbol (without value)."""
         if isinstance(other, GeneValue):
             return self.symbol == other.symbol
         return False
@@ -37,11 +39,13 @@ class GeneValueFullHash(GeneValue):
 
         allow_mutation = False
 
-    def __hash__(self):
+    def __hash__(self: "GeneValue") -> int:
+        """Hash the gene symbol (with value)."""
         # TODO note about hashing collisions
         return hash(tuple(self.__dict__.values()))
 
-    def __eq__(self, other):
+    def __eq__(self: "GeneValue", other: Any) -> bool:  # noqa: ANN401
+        """Compare the gene symbol (with value)."""
         if isinstance(other, GeneValue):
             return self.__dict__ == other.__dict__
         return False

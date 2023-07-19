@@ -1,11 +1,12 @@
-import pytest
+"""Test the boolean algebra tool class."""
 from pathlib import Path
 
+import pytest
 from geneweaver.tools.boolean_algebra.tool import (
     BooleanAlgebra,
-    BooleanAlgebraType,
     BooleanAlgebraInput,
     BooleanAlgebraOutput,
+    BooleanAlgebraType,
     WorkflowType,
 )
 
@@ -13,28 +14,28 @@ from tests.unit.const import (
     BOOLEAN_GENESET_GENES_0,
     BOOLEAN_GENESET_GENES_1,
     BOOLEAN_GENESET_GENES_2,
-    UNION_BOOLEAN_GENESET_GENES_0_1,
+    DIFF_BOOLEAN_GENESET_GENES_0_1_2,
     INT_BOOLEAN_GENESET_GENES_0_1,
+    INT_BOOLEAN_GENESET_GENES_0_1_2,
     INT_BOOLEAN_GENESET_GENES_0_2,
     INT_BOOLEAN_GENESET_GENES_1_2,
-    INT_BOOLEAN_GENESET_GENES_0_1_2,
-    DIFF_BOOLEAN_GENESET_GENES_0_1_2,
+    UNION_BOOLEAN_GENESET_GENES_0_1,
 )
 
 
 @pytest.mark.parametrize(
-    "input_value, expected",
+    ("input_value", "expected"),
     [
         # Union
-        [
+        (
             BooleanAlgebraInput(
                 type=BooleanAlgebraType.UNION,
                 input_genesets=[BOOLEAN_GENESET_GENES_0, BOOLEAN_GENESET_GENES_1],
             ),
             BooleanAlgebraOutput(result=UNION_BOOLEAN_GENESET_GENES_0_1),
-        ],
+        ),
         # Intersection
-        [
+        (
             BooleanAlgebraInput(
                 type=BooleanAlgebraType.INTERSECTION,
                 input_genesets=[
@@ -52,9 +53,9 @@ from tests.unit.const import (
                     (0, 1, 2): INT_BOOLEAN_GENESET_GENES_0_1_2,
                 }
             ),
-        ],
+        ),
         # Difference
-        [
+        (
             BooleanAlgebraInput(
                 type=BooleanAlgebraType.DIFFERENCE,
                 input_genesets=[
@@ -64,10 +65,11 @@ from tests.unit.const import (
                 ],
             ),
             BooleanAlgebraOutput(result=DIFF_BOOLEAN_GENESET_GENES_0_1_2),
-        ],
+        ),
     ],
 )
 def test_boolean_algebra_run(input_value, expected):
+    """The Boolean Algebra tool class can run with different inputs."""
     ba = BooleanAlgebra()
     run_result = ba.run(input_value)
     for item in run_result.result:
@@ -77,6 +79,7 @@ def test_boolean_algebra_run(input_value, expected):
 
 
 def test_boolean_algebra_properties():
+    """The Boolean Algebra tool class has some predictable properties."""
     ba = BooleanAlgebra()
     assert ba.tool_name == "Boolean Algebra"
     assert ba.tool_input is BooleanAlgebraInput

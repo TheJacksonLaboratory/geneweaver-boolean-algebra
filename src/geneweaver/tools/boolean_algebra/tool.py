@@ -1,21 +1,21 @@
 """Boolean algebra tool."""
+# ruff: noqa: D102
 from __future__ import annotations
 
 from pathlib import Path
 from typing import Optional, Type
 
-from geneweaver.tools.framework import ToolOutput, ToolInput
+from geneweaver.tools.boolean_algebra import (
+    combination_intersection,
+    iterable_to_sets,
+    symmetric_difference,
+    union,
+)
+from geneweaver.tools.framework import ToolInput, ToolOutput
 from geneweaver.tools.framework.abstract import AbstractTool
 from geneweaver.tools.framework.enum import WorkflowType
 
 from .schema import BooleanAlgebraInput, BooleanAlgebraOutput, BooleanAlgebraType
-
-from geneweaver.tools.boolean_algebra import (
-    union,
-    combination_intersection,
-    symmetric_difference,
-    iterable_to_sets,
-)
 
 
 class BooleanAlgebra(AbstractTool):

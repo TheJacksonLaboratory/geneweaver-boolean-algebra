@@ -1,7 +1,8 @@
 """Find the union of N genesets.
 
-The union will contain one set with all the unique genes in the input sets."""
-from typing import Set, Hashable
+The union will contain one set with all the unique genes in the input sets.
+"""
+from typing import Hashable, Set
 
 
 def union(*args: Set[Hashable]) -> Set[Hashable]:

@@ -1,12 +1,8 @@
-"""Find the symmetric difference of N sets.
+"""Find the symmetric difference of N sets."""
+from typing import Hashable, Set
 
-
-"""
-from typing import Set, Hashable
-from geneweaver.tools.boolean_algebra import (
-    combination_intersection,
-    union,
-)
+from geneweaver.tools.boolean_algebra.intersection import combination_intersection
+from geneweaver.tools.boolean_algebra.union import union
 
 
 def symmetric_difference(*args: Set[Hashable]) -> Set[Hashable]:

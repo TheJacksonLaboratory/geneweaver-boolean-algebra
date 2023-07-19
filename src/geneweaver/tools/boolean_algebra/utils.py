@@ -1,5 +1,5 @@
 """Utility functions for boolean algebra operations."""
-from typing import List, Tuple, Dict, Iterable, Hashable
+from typing import Hashable, Iterable, List
 
 
 def iterable_to_sets(input_sets: Iterable[Iterable[Hashable]]) -> List[set]:
