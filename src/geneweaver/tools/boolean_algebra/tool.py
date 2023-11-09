@@ -5,12 +5,10 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional, Type
 
-from geneweaver.tools.boolean_algebra import (
-    combination_intersection,
-    iterable_to_sets,
-    symmetric_difference,
-    union,
-)
+from geneweaver.tools.boolean_algebra.intersection import combination_intersection
+from geneweaver.tools.boolean_algebra.symmetric_difference import symmetric_difference
+from geneweaver.tools.boolean_algebra.union import union
+from geneweaver.tools.boolean_algebra.utils import iterable_to_sets
 from geneweaver.tools.framework import ToolInput, ToolOutput
 from geneweaver.tools.framework.abstract import AbstractTool
 from geneweaver.tools.framework.enum import WorkflowType
