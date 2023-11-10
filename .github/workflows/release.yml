@@ -10,12 +10,12 @@ permissions:
 
 jobs:
   format-lint:
-    uses: ./.github/actions/_format-lint-action.yml@main
+    uses: ./.github/workflows/_format-lint-action.yml
     with:
       python-version: '3.9'
   test:
     needs: format-lint
-    uses: ./.github/actions/_run-tests-action.yml@main
+    uses: ./.github/workflows/_run-tests-action.yml
     with:
       python-version: '3.9'
       runner-os: 'ubuntu-latest'
