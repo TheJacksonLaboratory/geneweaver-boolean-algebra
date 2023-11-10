@@ -14,7 +14,6 @@ on:
         type: string
       upload-coverage:
         description: 'Upload coverage results'
-        required: true
         default: true
         type: boolean
 jobs:
