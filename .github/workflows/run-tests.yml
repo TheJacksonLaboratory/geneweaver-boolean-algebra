@@ -1,0 +1,63 @@
+name: Python application test with Poetry
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  format-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install Black and Ruff
+        run: |
+          pip install black ruff
+      - name: Run Ruff Linter
+        run: |
+          ruff src/ --fix
+      - name: Run Black Formatter
+        run: |
+          black src/
+  test:
+    needs: format-lint
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ['3.9', '3.10', '3.11']
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        if [[ "$RUNNER_OS" == "macOS" ]]; then
+          echo "/Users/runner/.local/bin:$PATH" >> $GITHUB_PATH
+        fi
+    - name: Configure Poetry
+      run: |
+        poetry config virtualenvs.create false
+    - name: Install dependencies with Poetry
+      run: |
+        poetry install
+    - name: Test with pytest
+      run: |
+        poetry run pytest tests --cov=geneweaver.tools.boolean_algebra \
+        --cov-report html \
+        --cov-report term
+    - name: Upload pytest coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: pytest-coverage-${{ matrix.python-version }}-${{ matrix.os }}
+        path: htmlcov/
+      # Use always() to always run this step to publish test results when there are test failures
+      if: ${{ always() }}
