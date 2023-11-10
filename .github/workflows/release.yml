@@ -21,13 +21,14 @@ jobs:
       runner-os: 'ubuntu-latest'
       upload-coverage: false
   release:
+    needs: test
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.9'
 
@@ -41,15 +42,15 @@ jobs:
         # Extract version from pyproject.toml
         version=$(python -c "import toml; print(toml.load('pyproject.toml')['tool']['poetry']['version'])")
         echo "Version=$version"
-        echo "::set-output name=version::$version"
+        echo "{version}={$version}" >> $GITHUB_OUTPUT
 
         # Check if this version tag already exists
         if git rev-parse "v$version" >/dev/null 2>&1; then
             echo "Version already released"
-            echo "::set-output name=should_release::false"
+            echo "{should_release}={true}" >> $GITHUB_OUTPUT
         else
             echo "New version detected"
-            echo "::set-output name=should_release::true"
+            echo "{should_release}={false}" >> $GITHUB_OUTPUT
         fi
 
     - name: Determine Release Type
@@ -58,10 +59,10 @@ jobs:
         version=$(python -c "import toml; print(toml.load('pyproject.toml')['tool']['poetry']['version'])")
         if [[ $version =~ [a-zA-Z] ]]; then
           echo "Pre-release version detected"
-          echo "::set-output name=prerelease::true"
+          echo "{prerelease}={true}" >> $GITHUB_OUTPUT
         else
           echo "Full release version detected"
-          echo "::set-output name=prerelease::false"
+          echo "{prerelease}={false}" >> $GITHUB_OUTPUT
         fi
 
     - name: Install Poetry
@@ -91,5 +92,5 @@ jobs:
         prerelease: ${{ steps.release_type.outputs.prerelease }}
         body: |
           Release v${{ steps.version_check.outputs.version }}
-          PyPI: https://pypi.org/project/geneweaver-boolean-algebra/{{ steps.version_check.outputs.version }}/
+          PyPI: https://pypi.org/project/geneweaver-boolean-algebra/${{ steps.version_check.outputs.version }}/
 
