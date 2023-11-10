@@ -22,25 +22,20 @@ jobs:
           runner-os: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
   comment-coverage-report:
-    needs: [ your-test-job ]
+    needs: [ test ]
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
       - name: Download coverage report artifact
         uses: actions/download-artifact@v3
         with:
           name: coverage-report
-
       - name: Read coverage report
         id: read-coverage
         run: |
           echo "COVERAGE_REPORT<<EOF" >> $GITHUB_ENV
           cat coverage_report.txt >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-
       - name: Comment coverage report
         uses: peter-evans/create-or-update-comment@v3
         with:
