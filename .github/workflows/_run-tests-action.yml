@@ -36,9 +36,9 @@ jobs:
       - name: Install dependencies with Poetry
         run: poetry install
       - name: Test with pytest
-        run: poetry run pytest tests --cov=geneweaver.tools.boolean_algebra \
-            --cov-report html \
-            --cov-report term \
+        run: poetry run pytest tests \
+            --cov=geneweaver.tools.boolean_algebra \
+            --cov-report=term \
             --cov-fail-under=100 > coverage_report.txt
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
