@@ -10,20 +10,16 @@ permissions:
 
 jobs:
   format-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/actions/_format-lint-action@v1
-        with:
-          python-version: '3.9'
+    uses: ./.github/actions/_format-lint-action.yml
+    with:
+      python-version: '3.9'
   test:
     needs: format-lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/actions/_run-tests-action@v1
-        with:
-          python-version: '3.9'
-          runner-os: 'ubuntu-latest'
-          upload-coverage: false
+    uses: ./.github/actions/_run-tests-action.yml
+    with:
+      python-version: '3.9'
+      runner-os: 'ubuntu-latest'
+      upload-coverage: false
   release:
     runs-on: ubuntu-latest
     steps:

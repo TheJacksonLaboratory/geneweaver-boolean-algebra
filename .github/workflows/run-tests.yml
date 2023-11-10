@@ -4,23 +4,19 @@ on:
     branches: [ main ]
 jobs:
   format-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/actions/_format-lint-action@main
-        with:
-          python-version: '3.9'
+    uses: ./.github/actions/_format-lint-action.yml
+    with:
+      python-version: '3.9'
   test:
     needs: format-lint
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
         python-version: ['3.9', '3.10', '3.11']
-    steps:
-      - uses: ./.github/actions/_run-tests-action@main
-        with:
-          runner-os: ${{ matrix.os }}
-          python-version: ${{ matrix.python-version }}
+    uses: ./.github/actions/_run-tests-action.yml
+    with:
+      runner-os: ${{ matrix.os }}
+      python-version: ${{ matrix.python-version }}
   comment-coverage-report:
     needs: [ test ]
     runs-on: ubuntu-latest
