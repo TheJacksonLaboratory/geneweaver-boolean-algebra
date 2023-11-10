@@ -54,7 +54,7 @@ jobs:
         poetry run pytest tests --cov=geneweaver.tools.boolean_algebra \
         --cov-report html \
         --cov-report term
-    - name: Upload pytest test results
+    - name: Upload pytest coverage results
       uses: actions/upload-artifact@v3
       with:
         name: pytest-coverage-${{ matrix.python-version }}-${{ matrix.os }}
