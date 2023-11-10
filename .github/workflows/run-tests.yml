@@ -34,13 +34,20 @@ jobs:
         with:
           name: coverage-report
 
+      - name: Read coverage report
+        id: read-coverage
+        run: |
+          echo "COVERAGE_REPORT<<EOF" >> $GITHUB_ENV
+          cat coverage_report.txt >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
       - name: Comment coverage report
         uses: peter-evans/create-or-update-comment@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            ### Testing and Coverage Report
+            ### Test Coverage Report
             ```
-            ${{ readFile('coverage_report.txt') }}
+            ${{ env.COVERAGE_REPORT }}
             ```
