@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "geneweaver-boolean-algebra"
-version = "0.1.0a4"
+version = "0.1.0"
 description = "Geneweaver's Boolean Algebra Tool"
 authors = ["Alexander Berger <alexander.berger@jax.org>"]
 license = "Apache-2.0"
