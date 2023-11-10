@@ -38,8 +38,19 @@ jobs:
             echo "::set-output name=should_release::true"
         fi
 
+    - name: Determine Release Type
+      id: release_type
+      run: |
+        version=$(python -c "import toml; print(toml.load('pyproject.toml')['tool']['poetry']['version'])")
+        if [[ $version =~ [a-zA-Z] ]]; then
+          echo "Pre-release version detected"
+          echo "::set-output name=prerelease::true"
+        else
+          echo "Full release version detected"
+          echo "::set-output name=prerelease::false"
+        fi
+
     - name: Create Release
-      if: steps.version_check.outputs.should_release == 'true'
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -47,4 +58,4 @@ jobs:
         tag_name: v${{ steps.version_check.outputs.version }}
         release_name: Release v${{ steps.version_check.outputs.version }}
         draft: false
-        prerelease: false
+        prerelease: ${{ steps.release_type.outputs.prerelease }}
