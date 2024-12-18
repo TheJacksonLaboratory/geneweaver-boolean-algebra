@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "geneweaver-boolean-algebra"
-version = "0.2.2"
+version = "0.3.0a0"
 description = "Geneweaver's Boolean Algebra Tool"
 authors = ["Alexander Berger <alexander.berger@jax.org>"]
 license = "Apache-2.0"
@@ -19,6 +19,9 @@ scipy = "^1.11.2"
 [tool.poetry.group.dev.dependencies]
 geneweaver-testing = "^0.0.2b2"
 notebook = "^6.5.4"
+
+[tool.poetry.plugins."jax.ats.plugins"]
+"boolean_algebra" = "geneweaver.tools.boolean_algebra.plugin:BooleanAlgebra"
 
 [tool.ruff]
 select = ['F', 'E', 'W', 'A', 'C90', 'N', 'B', 'ANN', 'D', 'I', 'ERA', 'PD', 'NPY', 'PT']
