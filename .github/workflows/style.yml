@@ -10,4 +10,4 @@ jobs:
   format-lint:
     uses: ./.github/workflows/_format-lint-action.yml
     with:
-      python-version: '3.9'
+      python-version: '3.13'

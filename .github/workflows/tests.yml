@@ -10,8 +10,8 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        python-version: ['3.9', '3.10', '3.11']
+        os: [ubuntu-latest]
+        python-version: ['3.10', '3.11', '3.12', '3.13']
     uses: ./.github/workflows/_run-tests-action.yml
     with:
       runner-os: ${{ matrix.os }}

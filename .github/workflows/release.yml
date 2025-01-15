@@ -14,12 +14,12 @@ jobs:
   format-lint:
     uses: ./.github/workflows/_format-lint-action.yml
     with:
-      python-version: '3.9'
+      python-version: '3.13'
   test:
     needs: format-lint
     uses: ./.github/workflows/_run-tests-action.yml
     with:
-      python-version: '3.9'
+      python-version: '3.13'
       runner-os: 'ubuntu-latest'
       upload-coverage: false
       required-coverage: ${{ vars.REQUIRED_COVERAGE }}
@@ -33,7 +33,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'
+        python-version: '3.13'
 
     - name: Install dependencies
       run: |
