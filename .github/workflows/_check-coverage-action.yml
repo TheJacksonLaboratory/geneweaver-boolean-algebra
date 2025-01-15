@@ -8,7 +8,7 @@ on:
         required: true
       python-version:
         description: Python version to set up'
-        default: '3.11'
+        default: '3.13'
         type: string
       runner-os:
         description: 'Runner OS'
