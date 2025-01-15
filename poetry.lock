@@ -738,17 +738,17 @@ tomli = ">=2.0.1,<3.0.0"
 
 [[package]]
 name = "geneweaver-tools"
-version = "0.0.4"
+version = "0.0.5"
 description = "A framework to allow for consistent implementation of tools for the GeneWeaver project."
 optional = false
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "geneweaver_tools-0.0.4-py3-none-any.whl", hash = "sha256:dc1fcc367ff7d03ac18aeade18d7d4425ac2ddf5c9d15d2c23d15727053da028"},
-    {file = "geneweaver_tools-0.0.4.tar.gz", hash = "sha256:62417582e7b6900bf57e1cd4c53674aaa5da954663a51300b97034ce94f72b5c"},
+    {file = "geneweaver_tools-0.0.5-py3-none-any.whl", hash = "sha256:d3def953d82ebb7ce51791a000a45c8e17aa57f90fae93f82911539c7b4f7bf5"},
+    {file = "geneweaver_tools-0.0.5.tar.gz", hash = "sha256:b28d463bcdbdc30f27a8cf863c865d559f0dd43da4a8a3d17f2f27eb4acb243f"},
 ]
 
 [package.dependencies]
-geneweaver-core = ">=0.9.1,<0.10.0"
+geneweaver-core = ">=0.9.1,<1.0"
 
 [[package]]
 name = "h11"
@@ -2987,4 +2987,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "<4.0,>=3.10"
-content-hash = "3ccae08fb99eaaa73a21821ba68d964945f87d904872372350b2f41ade13505a"
+content-hash = "38a6b742b001647187ef27f5a42ade1b578c79f6e466da49c3baa350b15ff09b"

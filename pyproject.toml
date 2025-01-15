@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "geneweaver-boolean-algebra"
-version = "0.3.0a2"
+version = "0.3.0a3"
 description = "Geneweaver's Boolean Algebra Tool"
 authors = ["Alexander Berger <alexander.berger@jax.org>"]
 license = "Apache-2.0"
@@ -11,7 +11,7 @@ packages = [{include = "geneweaver/tools/boolean_algebra", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "<4.0,>=3.10"
-geneweaver-core = "^0.9.1"
+geneweaver-core = "<1.0,>=0.9.1"
 geneweaver-tools = "<1.0,>=0.0.4"
 jupyter = "^1.0.0"
 scipy = "^1.14.1"
